@@ -81,5 +81,7 @@ int main() {
 	auto X2 = BisectionMethod(0.0, 6.0, F);
 	auto X3 = NewtonBisectionMethod(1.0, F, F, FD);
 
+	auto X4 = BisectionMethod(X - 1, X + 1, F);//value X have bias.
+
 	return 0;
 }
