@@ -22,6 +22,10 @@ T NewtonMethod(T X, F Fun, FD FunDash,std::size_t Lim=50) {
 }
 template<class T=double,class F>
 T BisectionMethod(T Low, T High, F Fun, std::size_t Lim = 50) {
+
+	if (Low > High) std::swap(Low, High);
+
+
 	T XN(0);
 	T X = (Low + High) / 2;
 	T SL = Fun(Low) > 0 ? 1 : -1;
@@ -61,7 +65,7 @@ T NewtonBisectionMethod(T X, BMF BMFun, NMF NMFun, NMFD NMFunDash,std::size_t Li
 	T XN(0);
 	T L=std::numeric_limits<T>::min();
 	T H=std::numeric_limits<T>::max();
-	for(std::size_t i=0;i<7;i++){//7==prime. good meen is not implimentation.
+	for(std::size_t i=0;i<7;i++){//7==prime. no meen is implimented.
 		if (X == XN) break;
 		XN = X;
 		X = X - (NMFun(X) / (NMFunDash(X)));
@@ -81,7 +85,7 @@ int main() {
 	auto X2 = BisectionMethod(0.0, 6.0, F);
 	auto X3 = NewtonBisectionMethod(1.0, F, F, FD);
 
-	auto X4 = BisectionMethod(X - 1, X + 1, F);//value X have bias.
+	auto X4 = BisectionMethod(X - 0.5, X+0.5 , F);//value X have bias.
 
 	return 0;
 }
