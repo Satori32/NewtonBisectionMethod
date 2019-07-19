@@ -121,6 +121,6 @@ int main() {
 	auto [X5, Min, Max] = NewtonMethod2(X7, F, FD,0);
 	auto X6 = BisectionMethod(Min, Max, F,0);
 	/**/
-	auto X8 = SandWitchMagic(0.0, 10.0, F, F, FD);
+	auto X8 = SandWitchMagic(0.0, 10.0, F, F, FD,30);
 	return 0;
 }
