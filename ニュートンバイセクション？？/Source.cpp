@@ -109,18 +109,18 @@ int main() {
 
 	auto F = [](const auto& X) { return X * X - 2;  };//x^2=2 to x^2-2=0;
 	auto FD = [](const auto& X) {return 2 * X; };
-	/** /
+	/**/
 	auto X = NewtonMethod(1.0, F, FD,12);
 	auto X2 = BisectionMethod(0.0, 6.0, F);
 //	auto X3 = NewtonBisectionMethod(1.0, F, F, FD);
 
-	auto X4 = BisectionMethod(X - 0.5, X+0.5 , F);//value X have bias.
+//	auto X4 = BisectionMethod(X - 0.5, X+0.5 , F);//value X have bias.
 	/**/
 	/** /
 	auto X7 = BisectionMethod(0.0, 10.0, F,0);
 	auto [X5, Min, Max] = NewtonMethod2(X7, F, FD,0);
 	auto X6 = BisectionMethod(Min, Max, F,0);
 	/**/
-	auto X8 = SandWitchMagic(0.0, 10.0, F, F, FD,30);
+	auto X8 = SandWitchMagic(0.0, 10.0, F, F, FD);
 	return 0;
 }
