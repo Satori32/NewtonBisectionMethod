@@ -78,25 +78,11 @@ T BisectionMethod(T Low, T High, F Fun, std::size_t Lim = 50) {
 	}
 	return X;
 }
-/** /
 template<class T=double ,class BMF,class NMF,class NMFD>
 T NewtonBisectionMethod(T X, BMF BMFun, NMF NMFun, NMFD NMFunDash,std::size_t Lim=50) {//maybe perfect answer.
-	std::size_t C = 0;
-	T XN(0);
-	T L=std::numeric_limits<T>::min();
-	T H=std::numeric_limits<T>::max();
-	for(std::size_t i=0;i<7;i++){//7==prime. no meen is implimented.
-		if (X == XN) break;
-		XN = X;
-		X = X - (NMFun(X) / (NMFunDash(X)));
-		L = std::max(L, X);
-		H = std::min(H, X);
-		if (C == Lim && Lim != 0) { break; }
-		C++;
-	}
+	auto[A, L, H] = NewtonMethod2<T>(X, NMFun, NMFunDash, Lim);
 	return BisectionMethod(L, H, BMFun, Lim);
 }
-/**/
 template<class T,class FB,class FN,class FND>
 T SandWitchMagic(const T& Min, const T& Max, FB fb, FN fn, FND fnd, std::size_t N = 0) {//naming is poor mind.
 	auto X = BisectionMethod(Min, Max, fb, N);
@@ -110,7 +96,7 @@ int main() {
 	auto F = [](const auto& X) { return X * X - 2;  };//x^2=2 to x^2-2=0;
 	auto FD = [](const auto& X) {return 2 * X; };
 	/**/
-	auto X = NewtonMethod(1.0, F, FD,12);
+	auto X = NewtonMethod(1.0, F, FD);
 	auto X2 = BisectionMethod(0.0, 6.0, F);
 //	auto X3 = NewtonBisectionMethod(1.0, F, F, FD);
 
@@ -122,5 +108,6 @@ int main() {
 	auto X6 = BisectionMethod(Min, Max, F,0);
 	/**/
 	auto X8 = SandWitchMagic(0.0, 10.0, F, F, FD);
+	auto X9 = NewtonBisectionMethod(1.0, F, F, FD);
 	return 0;
 }
