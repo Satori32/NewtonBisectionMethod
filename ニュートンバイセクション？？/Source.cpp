@@ -107,7 +107,7 @@ int main() {
 	auto [X5, Min, Max] = NewtonMethod2(X7, F, FD,0);
 	auto X6 = BisectionMethod(Min, Max, F,0);
 	/**/
-	auto X8 = SandWitchMagic(0.0, 10.0, F, F, FD);
-	auto X9 = NewtonBisectionMethod(1.0, F, F, FD);
+	auto X8 = SandWitchMagic(0.0, 10.0, F, F, FD);//you know the anther in [a,b]. use this.
+	auto X9 = NewtonBisectionMethod(1.0, F, F, FD);//you know first value.use this.
 	return 0;
 }
